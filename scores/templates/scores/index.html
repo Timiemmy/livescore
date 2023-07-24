@@ -1,32 +1,60 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'scores/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Contact</a></li>
-            <li><a href="">About</a></li>
-        </ul>
-    </div>
-    <div class="container">
-        <div class="app">
-            <div class="header">
-                <span class="team team-left">
-                    <span class="name">Team 1</span>
-                </span>
-                <span class="score">0-0</span>
-                <span class="team team-right">
-                    <span class="name">Team 2</span>
-                </span>
+    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark" aria-label="Seventh navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand fs-1" href="#">WScores</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleXxl"
+                aria-controls="navbarsExampleXxl" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarsExampleXxl">
+                <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                            aria-expanded="false">League</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                </form>
             </div>
         </div>
-    </div>
+    </nav>
+    
+
+    {% for result in JsonResponse%}
+    <main>
+        <div class="container">
+                <div class="row mb-2 text-center">
+                    <div class="col-2 themed-grid-col p-3 d-inline bg-primary fw-bolder"><img src="{{result.team_home_badge}}" class="rounded-circle" style="width: 50px;">{{result.match_hometeam_name}}</div>
+                    <div class="col-2 themed-grid-col p-3">{{result.match_hometeam_ft_score}} - {{result.match_awayteam_ft_score}}</div>
+                    <div class="col-2 themed-grid-col p-3 d-inline  bg-primary-subtle fw-bolder">{{result.match_awayteam_name}}<img src="{{result.team_away_badge}}" class="rounded-circle" style="width: 50px;"></div>
+                </div>
+        </div>
+    </main>
+    {% endfor %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
 </body>
 </html>
